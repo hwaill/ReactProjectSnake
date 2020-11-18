@@ -27,7 +27,7 @@ class Leaderboard extends React.Component {
 
   render() {
     const scoresList = this.state.scores.map((score) =>
-      <LeaderboardItem userName={this.props.userName}score={score}/>
+      <LeaderboardItem key={score} userName={this.props.userName}score={score}/>
     );
 
     return (

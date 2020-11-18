@@ -75,8 +75,8 @@ class SnakeGameContainer extends React.Component {
         <div id="nameInputContainer">
           <div id="nameInput">
             <h1 id="nameInputHeader">Enter a Display Name</h1>
-            <input type="text" onChange={this.handleTextInputChange}/>
-            <input type="button" value="Continue" onClick={this.setName}/>
+            <input id="nameInputTextInput" type="text" onChange={this.handleTextInputChange}/>
+            <input id="nameInputButtonInput" type="button" value="Continue" onClick={this.setName}/>
           </div>
         </div>
       );
@@ -95,9 +95,11 @@ class SnakeGameContainer extends React.Component {
 
     return (
       <div id="pageHolder">
-        {pageHeader}
+        <div id="headerAndLeaderboard">
+          {pageHeader}
+          <Leaderboard userName={this.state.name} updateLeaderboard={this.state.updateLeaderboard} gameOverScore={this.state.gameOverScore} finishUpdate={this.finishLeaderboardUpdate}/>
+        </div>
         <MyGame />
-        <Leaderboard userName={this.state.name} updateLeaderboard={this.state.updateLeaderboard} gameOverScore={this.state.gameOverScore} finishUpdate={this.finishLeaderboardUpdate}/>
         {inputField}
       </div>
     );
