@@ -1,5 +1,6 @@
 import React from 'react';
 import LeaderboardItem from './LeaderboardItem.js'
+import firebase from './firebase.js'
 
 class Leaderboard extends React.Component {
   constructor(props) {

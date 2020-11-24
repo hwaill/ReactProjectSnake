@@ -1,7 +1,6 @@
 import React from "react";
 import './App.css';
 import SnakeGameContainer from './SnakeGameContainer.js';
-import firebase from './firebase.js';
 
 class App extends React.Component {
   constructor(props) {
