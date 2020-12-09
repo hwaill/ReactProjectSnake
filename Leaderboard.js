@@ -1,32 +1,30 @@
 import React from 'react';
-import LeaderboardItem from './LeaderboardItem.js'
-import firebase from './firebase.js'
+import LeaderboardItem from './LeaderboardItem.js';
+import {firebasedb} from './firebase';
 
 class Leaderboard extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      scores: []
-    }
   }
 
+  // Perform database transaction here
+  // use props values: this.props.userName, this.props.gameOverScore
   componentDidUpdate(previousProps) {
     if(this.props.updateLeaderboard && !previousProps.updateLeaderboard) {
-      //in here, a game has ended and there's a new score to handle
-      //we have access to this.props.gameOverScore , which is that score, and
-      //this.props.userName
-      var temp = this.state.scores;
-      temp.push(this.props.gameOverScore);
-      this.setState({
-        scores: temp
-      });
-      //finishUpdate needs to be called at the end
+
+      const currentScore = this.props.gameOverScore;
+      const player = this.props.userName;
+      
+      // add record to database
+      firebasedb.collection('leaderboard').add();
+
+      //finishUpdate sets updating state to false for leaderboard
       this.props.finishUpdate();
     }
   }
 
   render() {
+
     const scoresList = this.state.scores.map((score) =>
       <LeaderboardItem key={score} userName={this.props.userName}score={score}/>
     );
