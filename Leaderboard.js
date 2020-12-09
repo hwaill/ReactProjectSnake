@@ -1,5 +1,7 @@
 import React from 'react';
 import LeaderboardItem from './LeaderboardItem.js';
+// import {firebasedb} from './firebase.js';
+// import firebasedb from './firebase.js';
 import {firebasedb} from './firebase';
 
 class Leaderboard extends React.Component {
