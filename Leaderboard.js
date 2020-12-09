@@ -7,6 +7,10 @@ class Leaderboard extends React.Component {
     super(props);
   }
 
+  // React hooks: useEffect (effects hook)
+  // https://reactjs.org/docs/hooks-effect.html
+  // intended to replace componentDidUpdate
+
   // Perform database transaction here
   // use props values: this.props.userName, this.props.gameOverScore
   componentDidUpdate(previousProps) {
@@ -30,10 +34,12 @@ class Leaderboard extends React.Component {
     );
 
     return (
-      <div id="leaderboardContainer">
-        <h3 id="leaderboardHeader">Scores</h3>
-        <ol>{scoresList}</ol>
-      </div>
+      <section id="leaderboardContainer">
+        <table>
+          <thead><tr><h3 id="leaderboardHeader">Leaderboard</h3></tr></thead>
+          <tbody>{scoresList}</tbody>
+        </table>
+      </section>
     );
   }
 }

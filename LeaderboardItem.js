@@ -6,7 +6,12 @@ class LeaderboardItem extends React.Component {
   }
 
   render() {
-    return <ul>{this.props.userName}: {this.props.score}</ul>
+    return (
+      <tr>
+        <td>{this.props.userName}</td>
+        <td>{this.props.score}</td>
+      </tr>
+    );
   }
 }
 
