@@ -111,7 +111,7 @@ class Leaderboard extends React.Component {
     return (
       <section id="leaderboardContainer">
         <table>
-          <thead><tr><h3 id="leaderboardHeader">Leaderboard</h3></tr></thead>
+          <thead><tr id="leaderboardHeader">Leaderboard</tr></thead>
           <tbody>{scoresList}</tbody>
         </table>
       </section>
