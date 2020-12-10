@@ -20,6 +20,10 @@ class Leaderboard extends React.Component {
   // https://reactjs.org/docs/hooks-effect.html
   // intended to replace componentDidUpdate
 
+  componentDidMount() {
+    this.setLeaderboardTopToState();
+  }
+
   // Perform database transaction here (push)
   // use props values: this.props.userName, this.props.gameOverScore
   componentDidUpdate(previousProps) {
@@ -33,6 +37,8 @@ class Leaderboard extends React.Component {
         name: player,
         score: currentScore
       });
+
+      this.setLeaderboardTopToState();
 
       //finishUpdate sets updating state to false for leaderboard
       this.props.finishUpdate();
@@ -52,7 +58,7 @@ class Leaderboard extends React.Component {
         // score: entry.score
       }));
 
-      const numEntries = dataContent.length;
+      var numEntries = dataContent.length;
       var tempTopNames = [];
       var tempTopScores = [];
 
@@ -84,25 +90,27 @@ class Leaderboard extends React.Component {
       });
 
       // database integrity: reduce leaderboard to 10 entries
-      // while (numEntries > 10) {
-      //   var lowestScore = Number.MAX_SAFE_INTEGER;
-      //   var idToRemove;
-      //   for (var i ; i<numEntries; i++) {
-      //     if (dataContent[i].score < lowestScore) {
-      //       lowestScore = dataContent[i].score;
-      //       idToRemove = dataContent[i].id;
-      //     }
-      //   }
-      //   firebasedb.collection('leaderboard').doc(idToRemove).delete();
-      //   numEntries--;
-      // }
+      while (numEntries > 10) {
+        console.log(numEntries);
+        var lowestScore = Number.MAX_SAFE_INTEGER;
+        var idToRemove;
+        for (var i ; i<numEntries; i++) {
+          if (dataContent[i].score < lowestScore) {
+            lowestScore = dataContent[i].score;
+            idToRemove = dataContent[i].id;
+            console.log('Updated deleting value with id: ' + idToRemove);
+          }
+        }
+        firebasedb.collection('leaderboard').doc(idToRemove).delete();
+        numEntries--;
+      }
     });
 
   }
 
   render() {
 
-    this.setLeaderboardTopToState();
+    // this.setLeaderboardTopToState();
 
     const scoresList = this.state.topScores.map((score, index) =>
       <LeaderboardItem key={index} userName={this.state.topPlayers[index]} score={score}/>
@@ -111,7 +119,7 @@ class Leaderboard extends React.Component {
     return (
       <section id="leaderboardContainer">
         <table>
-          <thead><tr id="leaderboardHeader">Leaderboard</tr></thead>
+          <thead><tr><th id="leaderboardHeader">Leaderboard</th></tr></thead>
           <tbody>{scoresList}</tbody>
         </table>
       </section>
