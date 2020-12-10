@@ -5,7 +5,7 @@
 // import * as firebase from 'firebase/app';
 import firebase from 'firebase';
 // import { firebase } from '@firebase/app';
-// import 'firebase/firestore';
+import 'firebase/firestore';
 // var firebase = require("firebase");
 // require("firebase/firestore");
 
