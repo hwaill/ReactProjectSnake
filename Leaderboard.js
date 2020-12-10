@@ -97,7 +97,7 @@ class Leaderboard extends React.Component {
         console.log(numEntries);
         var lowestScore = Number.MAX_SAFE_INTEGER;
         var idToRemove;
-        for (var i ; i<numEntries; i++) {
+        for (var i=0 ; i<numEntries; i++) {
           if (dataContent[i].score < lowestScore) {
             lowestScore = dataContent[i].score;
             idToRemove = dataContent[i].id;
