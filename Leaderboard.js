@@ -16,6 +16,9 @@ class Leaderboard extends React.Component {
     this.setLeaderboardTopToState = this.setLeaderboardTopToState.bind(this);
   }
 
+  componentDidMount() {
+    this.setLeaderboardTopToState();
+  }
   // React hooks: useEffect (effects hook)
   // https://reactjs.org/docs/hooks-effect.html
   // intended to replace componentDidUpdate
@@ -27,12 +30,14 @@ class Leaderboard extends React.Component {
 
       const currentScore = this.props.gameOverScore;
       const player = this.props.userName;
-      
+
       // add record to database
       firebasedb.collection('leaderboard').add({
         name: player,
         score: currentScore
       });
+
+      this.setLeaderboardTopToState();
 
       //finishUpdate sets updating state to false for leaderboard
       this.props.finishUpdate();
@@ -102,8 +107,6 @@ class Leaderboard extends React.Component {
 
   render() {
 
-    this.setLeaderboardTopToState();
-
     const scoresList = this.state.topScores.map((score, index) =>
       <LeaderboardItem key={index} userName={this.state.topPlayers[index]} score={score}/>
     );
@@ -111,7 +114,7 @@ class Leaderboard extends React.Component {
     return (
       <section id="leaderboardContainer">
         <table>
-          <thead><tr id="leaderboardHeader">Leaderboard</tr></thead>
+          <thead><tr id="leaderboardHeader"><td>Leaderboard</td></tr></thead>
           <tbody>{scoresList}</tbody>
         </table>
       </section>
